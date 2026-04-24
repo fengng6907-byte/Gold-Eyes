@@ -133,9 +133,26 @@ export const DEMO_EXCHANGE_RATES: Record<string, number> = {
 };
 
 // ─── API Configuration ──────────────────────────────────────────
+
+// Provider endpoints
 export const GOLD_API_BASE = 'https://www.goldapi.io/api';
+export const METALS_API_BASE = 'https://metals-api.com/api';
+export const YAHOO_FINANCE_BASE = 'https://query1.finance.yahoo.com';
 export const EXCHANGE_API_BASE = 'https://v6.exchangerate-api.com/v6';
-export const CACHE_TTL_GOLD = 5 * 60 * 1000; // 5 minutes
+
+// Cache TTLs
+export const CACHE_TTL_GOLD = 5 * 60 * 1000; // 5 min — legacy (used by history route)
+export const CACHE_TTL_GOLD_PRICE = 15 * 1000; // 15 seconds — new gold price service
 export const CACHE_TTL_EXCHANGE = 60 * 60 * 1000; // 1 hour
-export const POLL_INTERVAL_GOLD = 60 * 1000; // 60 seconds
+
+// Frontend polling intervals
+export const POLL_INTERVAL_GOLD = 15 * 1000; // 15 seconds — near real-time
 export const POLL_INTERVAL_EXCHANGE = 30 * 60 * 1000; // 30 minutes
+
+// Request configuration
+export const REQUEST_TIMEOUT_MS = 5000; // 5 second timeout per request
+export const MAX_RETRIES = 2; // Max 2 retries per provider
+
+// SSE configuration
+export const SSE_INTERVAL_MS = 10 * 1000; // Push update every 10 seconds
+
