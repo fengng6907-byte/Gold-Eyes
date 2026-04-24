@@ -95,7 +95,7 @@ export default function MalaysiaInsight() {
             Market Insight
           </span>
           <span className="ml-auto text-[10px] text-muted-foreground">
-            Confidence: {insights.confidence}%
+            Confidence: {Math.round(insights.confidence)}%
           </span>
         </div>
         <p className="text-xs leading-relaxed text-muted-foreground">
