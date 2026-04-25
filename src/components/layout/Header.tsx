@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import ThemeToggle from '@/components/ui/ThemeToggle';
@@ -21,17 +22,20 @@ export default function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group" id="logo-link">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 transition-shadow duration-300">
-                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="GOLD Eyes"
+                width={44}
+                height={44}
+                className="rounded-xl shadow-lg shadow-gold-500/20 group-hover:shadow-gold-500/40 group-hover:scale-105 transition-all duration-300"
+                priority
+              />
               <div className="flex flex-col">
                 <span className="text-lg font-bold tracking-tight text-gold-gradient leading-tight">
                   GOLD Eyes
                 </span>
-                <span className="text-[10px] text-muted-foreground font-medium tracking-wider uppercase leading-none">
-                  Price Analytics
+                <span className="text-[9px] text-muted-foreground font-medium tracking-wider uppercase leading-none">
+                  Market Intelligence & Analytics
                 </span>
               </div>
             </Link>
@@ -87,7 +91,10 @@ export default function Header() {
       {/* Mobile Nav Drawer */}
       <div className={`nav-drawer ${mobileOpen ? 'active' : ''}`} id="mobile-nav">
         <div className="flex items-center justify-between mb-8">
-          <span className="text-lg font-bold text-gold-gradient">GOLD Eyes</span>
+          <div className="flex items-center gap-2">
+            <Image src="/logo.png" alt="GOLD Eyes" width={28} height={28} className="rounded-md" />
+            <span className="text-lg font-bold text-gold-gradient">GOLD Eyes</span>
+          </div>
           <button
             onClick={() => setMobileOpen(false)}
             className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center"
