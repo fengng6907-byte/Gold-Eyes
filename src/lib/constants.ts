@@ -4,9 +4,9 @@ import { CurrencyInfo, GoldPurity } from '@/types';
 export const TROY_OUNCE_TO_GRAMS = 31.1035;
 
 export const GOLD_PURITIES: Record<GoldPurity, { label: string; factor: number; karat: string }> = {
-  999: { label: '999 (24K)', factor: 0.999, karat: '24K' },
-  916: { label: '916 (22K)', factor: 0.916, karat: '22K' },
-  750: { label: '750 (18K)', factor: 0.750, karat: '18K' },
+  999: { label: '999 (24K)', factor: 0.999, karat: '999' },
+  916: { label: '916 (22K)', factor: 0.916, karat: '916' },
+  750: { label: '750 (18K)', factor: 0.750, karat: '750' },
 };
 
 // ─── All World Currencies ────────────────────────────────────────

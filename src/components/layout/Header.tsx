@@ -8,7 +8,6 @@ import ThemeToggle from '@/components/ui/ThemeToggle';
 const navLinks = [
   { href: '/', label: 'Dashboard', id: 'nav-dashboard' },
   { href: '/estimator', label: 'Estimator', id: 'nav-estimator' },
-  { href: '/calculator', label: 'Calculator', id: 'nav-calculator' },
 ];
 
 export default function Header() {

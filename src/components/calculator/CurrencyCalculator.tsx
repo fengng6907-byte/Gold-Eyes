@@ -5,7 +5,11 @@ import { useExchangeRates } from '@/hooks/useExchangeRates';
 import { CURRENCIES } from '@/lib/constants';
 import { formatNumber } from '@/lib/goldCalculations';
 
-export default function CurrencyCalculator() {
+interface CurrencyCalculatorProps {
+  compact?: boolean; // When true, renders without outer glass-card wrapper (for modal use)
+}
+
+export default function CurrencyCalculator({ compact = false }: CurrencyCalculatorProps) {
   const { rates, isLoading } = useExchangeRates();
   const [amount, setAmount] = useState<string>('1000');
   const [fromCurrency, setFromCurrency] = useState('USD');
@@ -18,7 +22,6 @@ export default function CurrencyCalculator() {
   const convert = useCallback(
     (value: number, from: string, to: string): number => {
       if (!rates[from] || !rates[to]) return 0;
-      // Convert to USD first, then to target
       const usdAmount = value / rates[from];
       return usdAmount * rates[to];
     },
@@ -55,12 +58,11 @@ export default function CurrencyCalculator() {
   const getFlag = (code: string) => CURRENCIES.find((c) => c.code === code)?.flag || '💱';
   const getSymbol = (code: string) => CURRENCIES.find((c) => c.code === code)?.symbol || '';
 
-  // Popular currencies as quick picks
   const quickPicks = ['USD', 'MYR', 'SGD', 'EUR', 'GBP', 'JPY', 'CNY', 'AUD'];
 
   if (isLoading) {
     return (
-      <div className="glass-card p-6 space-y-4">
+      <div className={`${compact ? 'p-4' : 'glass-card p-6'} space-y-4`}>
         <div className="skeleton h-4 w-40" />
         <div className="skeleton h-16 w-full rounded-xl" />
         <div className="skeleton h-16 w-full rounded-xl" />
@@ -68,12 +70,10 @@ export default function CurrencyCalculator() {
     );
   }
 
-  return (
-    <div className="glass-card p-6 animate-fade-in" id="currency-calculator">
-      <h2 className="text-lg font-bold mb-6">Currency Converter</h2>
-
+  const content = (
+    <>
       {/* Quick Picks */}
-      <div className="mb-5">
+      <div className="mb-4">
         <label className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">
           Popular Currencies
         </label>
@@ -109,7 +109,7 @@ export default function CurrencyCalculator() {
                 setShowFromDropdown(!showFromDropdown);
                 setShowToDropdown(false);
               }}
-              className="flex items-center gap-2 px-3 py-3 bg-muted rounded-xl text-sm font-semibold min-w-[120px] hover:bg-gold-500/5 transition-colors"
+              className="flex items-center gap-2 px-3 py-3 bg-muted rounded-xl text-sm font-semibold min-w-[110px] hover:bg-gold-500/5 transition-colors"
               id="from-currency-btn"
             >
               <span>{getFlag(fromCurrency)}</span>
@@ -119,7 +119,7 @@ export default function CurrencyCalculator() {
               </svg>
             </button>
             {showFromDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-64 max-h-64 bg-card border border-card-border rounded-xl shadow-xl z-20 overflow-hidden animate-slide-down">
+              <div className="absolute top-full left-0 mt-1 w-60 max-h-56 bg-card border border-card-border rounded-xl shadow-xl z-50 overflow-hidden animate-slide-down">
                 <div className="p-2 border-b border-card-border">
                   <input
                     type="text"
@@ -130,7 +130,7 @@ export default function CurrencyCalculator() {
                     autoFocus
                   />
                 </div>
-                <div className="overflow-y-auto max-h-48">
+                <div className="overflow-y-auto max-h-40">
                   {filteredFrom.map((c) => (
                     <button
                       key={c.code}
@@ -184,7 +184,7 @@ export default function CurrencyCalculator() {
       </div>
 
       {/* To */}
-      <div className="mb-5">
+      <div className="mb-4">
         <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 block">
           To
         </label>
@@ -195,7 +195,7 @@ export default function CurrencyCalculator() {
                 setShowToDropdown(!showToDropdown);
                 setShowFromDropdown(false);
               }}
-              className="flex items-center gap-2 px-3 py-3 bg-muted rounded-xl text-sm font-semibold min-w-[120px] hover:bg-gold-500/5 transition-colors"
+              className="flex items-center gap-2 px-3 py-3 bg-muted rounded-xl text-sm font-semibold min-w-[110px] hover:bg-gold-500/5 transition-colors"
               id="to-currency-btn"
             >
               <span>{getFlag(toCurrency)}</span>
@@ -205,7 +205,7 @@ export default function CurrencyCalculator() {
               </svg>
             </button>
             {showToDropdown && (
-              <div className="absolute top-full left-0 mt-1 w-64 max-h-64 bg-card border border-card-border rounded-xl shadow-xl z-20 overflow-hidden animate-slide-down">
+              <div className="absolute top-full left-0 mt-1 w-60 max-h-56 bg-card border border-card-border rounded-xl shadow-xl z-50 overflow-hidden animate-slide-down">
                 <div className="p-2 border-b border-card-border">
                   <input
                     type="text"
@@ -216,7 +216,7 @@ export default function CurrencyCalculator() {
                     autoFocus
                   />
                 </div>
-                <div className="overflow-y-auto max-h-48">
+                <div className="overflow-y-auto max-h-40">
                   {filteredTo.map((c) => (
                     <button
                       key={c.code}
@@ -245,8 +245,8 @@ export default function CurrencyCalculator() {
       </div>
 
       {/* Exchange Rate Info */}
-      <div className="bg-muted rounded-xl p-4 text-center">
-        <div className="text-xs text-muted-foreground mb-1">Exchange Rate</div>
+      <div className="bg-muted rounded-xl p-3 text-center">
+        <div className="text-xs text-muted-foreground mb-0.5">Exchange Rate</div>
         <div className="text-sm font-semibold">
           1 {fromCurrency} = {formatNumber(exchangeRate, 4)} {toCurrency}
         </div>
@@ -255,13 +255,24 @@ export default function CurrencyCalculator() {
       {/* Close dropdowns when clicking outside */}
       {(showFromDropdown || showToDropdown) && (
         <div
-          className="fixed inset-0 z-10"
+          className="fixed inset-0 z-40"
           onClick={() => {
             setShowFromDropdown(false);
             setShowToDropdown(false);
           }}
         />
       )}
+    </>
+  );
+
+  if (compact) {
+    return <div className="p-4">{content}</div>;
+  }
+
+  return (
+    <div className="glass-card p-6 animate-fade-in" id="currency-calculator">
+      <h2 className="text-lg font-bold mb-6">Currency Converter</h2>
+      {content}
     </div>
   );
 }

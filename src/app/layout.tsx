@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CurrencyCalculatorModal from "@/components/calculator/CurrencyCalculatorModal";
 
 export const metadata: Metadata = {
   title: {
@@ -48,6 +49,8 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        {/* Floating currency calculator — accessible from any page */}
+        <CurrencyCalculatorModal />
       </body>
     </html>
   );

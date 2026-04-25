@@ -131,16 +131,20 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold">Jewelry Estimator</div>
-                  <div className="text-[10px] text-muted-foreground">Calculate retail prices</div>
+                  <div className="text-[10px] text-muted-foreground">999 / 916 / 750 pricing</div>
                 </div>
                 <svg className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-gold-500 group-hover:translate-x-1 transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
 
-              <Link
-                href="/calculator"
-                className="flex items-center gap-3 p-3 rounded-xl bg-muted hover:bg-gold-500/5 transition-all duration-200 group"
+              <button
+                onClick={() => {
+                  // Trigger the floating calculator FAB
+                  const fab = document.getElementById('calculator-fab');
+                  if (fab) fab.click();
+                }}
+                className="w-full flex items-center gap-3 p-3 rounded-xl bg-muted hover:bg-gold-500/5 transition-all duration-200 group text-left"
                 id="link-calculator"
               >
                 <div className="w-10 h-10 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-500 group-hover:bg-gold-500/20 transition-colors">
@@ -155,7 +159,7 @@ export default function DashboardPage() {
                 <svg className="w-4 h-4 ml-auto text-muted-foreground group-hover:text-gold-500 group-hover:translate-x-1 transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
-              </Link>
+              </button>
             </div>
           </div>
         </div>

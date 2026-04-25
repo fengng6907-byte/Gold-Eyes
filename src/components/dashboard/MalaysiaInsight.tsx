@@ -64,14 +64,14 @@ export default function MalaysiaInsight() {
       {/* Gold Prices */}
       <div className="grid grid-cols-2 gap-3 mb-5">
         <div className="bg-muted rounded-xl p-4">
-          <div className="text-xs text-muted-foreground font-medium mb-1">999 Gold (24K)</div>
+          <div className="text-xs text-muted-foreground font-medium mb-1">999 Gold</div>
           <div className="text-xl font-bold text-gold-gradient">
             RM {formatNumber(insights.price999)}
           </div>
           <div className="text-[10px] text-muted-foreground mt-1">per gram</div>
         </div>
         <div className="bg-muted rounded-xl p-4">
-          <div className="text-xs text-muted-foreground font-medium mb-1">916 Gold (22K)</div>
+          <div className="text-xs text-muted-foreground font-medium mb-1">916 Gold</div>
           <div className="text-xl font-bold text-gold-gradient">
             RM {formatNumber(insights.price916)}
           </div>
